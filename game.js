@@ -1,2 +1,11 @@
-import { doConnect, sendMessage, onMessageReceived } from './communication.js';
+//game logic
+let runningGame = function () {
+};
 
+runningGame.prototype = {
+    preload: function () {
+    },
+
+    create: function () {
+    }
+};
