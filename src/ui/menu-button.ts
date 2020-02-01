@@ -36,6 +36,10 @@ export class MenuButton extends Phaser.GameObjects.Rectangle {
   private enterMenuButtonHoverState() {
     this.label.setColor('#000000');
     this.setFillStyle(0x888888);
+    let submit = this.scene.sound.add('hover');
+    submit.play({
+      volume: .3,
+    });
   }
 
   private enterMenuButtonRestState() {

@@ -30,7 +30,9 @@ export class MainMenuScene extends Phaser.Scene {
     new MenuButton(this, getGameWidth(this)/2.25, getGameWidth(this)/2.5, 'Start Game', () => {
       music.stop();
       console.log('MUSIC STOP');
-      submit.play();
+      submit.play({
+        volume: .2,
+      });
       this.scene.start('Game');
       
     });
