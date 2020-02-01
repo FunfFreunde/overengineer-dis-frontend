@@ -18,15 +18,21 @@ export class MainMenuScene extends Phaser.Scene {
 
   public create() {
     this.add.image(getGameWidth(this)/2, getGameHeight(this)/2, 'menu').setDisplaySize(getGameHeight(this), getGameHeight(this));
-
+    
+    // decl. of sounds
     let music = this.sound.add('bg_music');
+    let submit = this.sound.add('submit');
     music.play({
       volume: .3,
       loop: true
     })
 
     new MenuButton(this, getGameWidth(this)/2.25, getGameWidth(this)/2.5, 'Start Game', () => {
+      music.stop();
+      console.log('MUSIC STOP');
+      submit.play();
       this.scene.start('Game');
+      
     });
 
     new MenuButton(this, 100, 250, 'OUR Game', ()  => {

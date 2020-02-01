@@ -77,6 +77,7 @@ export class BootScene extends Phaser.Scene {
 
     // Audio
     this.load.audio('bg_music', ['assets/menu_music.wav']);
+    this.load.audio('submit', ['assets/tools.wav']);
   }
 
 }
