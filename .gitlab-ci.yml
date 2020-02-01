@@ -1,0 +1,42 @@
+stages:
+  - build
+  - release
+  - deploy
+
+include:
+  - project: 'ciapa/ci-includes'
+    file: 'k8s/deploy.yml'
+
+build:
+  stage: build
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+release:
+  stage: release
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - master
+
+k8s-deploy-prod:
+  extends: .k8s-deploy
+  stage: deploy
+  tags: []
+  before_script:
+    - 'mkdir -p .deploy'
+    - 'for f in kubernetes/*.yaml; do cp -- "$f" ".deploy/00$(basename $f)"; done'
+  cache: {}
+  dependencies: []
+  environment:
+    name: production
+  only:
+    - master
+    
