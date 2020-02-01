@@ -19,6 +19,9 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
       debug: true,
     },
   },
+  render: {
+    pixelArt: true,
+  },
 
   parent: 'game',
   backgroundColor: '#000000',

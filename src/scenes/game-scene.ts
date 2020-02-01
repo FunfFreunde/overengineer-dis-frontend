@@ -1,4 +1,4 @@
-import { Input } from 'phaser';
+import { Input, Physics } from 'phaser';
 import { getGameWidth, getGameHeight } from '../helpers';
 import { Card } from '../objects/sprites/Cards/Card';
 import { TireCard } from '../objects/sprites/Cards/TireCard';
@@ -9,6 +9,12 @@ import { SimpleMockCardDealer } from '../objects/SimpleMockCardDealer';
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
+  physics: {
+    default: "arcade",
+    arcade: {
+      debug: true
+    }
+  },
   key: 'Game',
 };
 
@@ -20,54 +26,50 @@ export class GameScene extends Phaser.Scene {
   private image: Phaser.Physics.Arcade.Sprite;
   private _dealer: CardDealerInterface;
   private _hand: Array<Card>;
+  private _handCardPhysics: Physics.Arcade.Group;
 
   constructor() {
     super(sceneConfig);
   }
 
   public create() {
-    // Add a player sprite that can be moved around. Place him in the middle of the screen.
-    this.image = this.physics.add.sprite(getGameWidth(this) / 2, getGameHeight(this) / 2, 'man');
-
-    // This is a nice helper Phaser provides to create listeners for some of the most common keys.
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-
-    // This is a nice helper Phaser provides to create listeners for some of the most common keys.
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.physics.world.setBounds(0, 0, 800, 600);
     this._setupHandCards();
     this._drawHandCards();
-    // this.hand.push(new TireCard(this, TireType.WINTER));
-        // console.log(Object.keys(CardType));
+    this._setupCollision();
   }
 
   private _setupHandCards() {
   }
 
+  private _setupCollision() {
+    this.physics.add.collider(this._hand, this._hand);
+  }
+
   private _drawHandCards() {
     this._dealer = new SimpleMockCardDealer();
     this._hand = this._dealer.requestFullHand(this);
-    console.log(this._hand);
   }
 
   public update() {
-    // Every frame, we create a new velocity for the sprite based on what keys the player is holding down.
-    const velocity = new Phaser.Math.Vector2(0, 0);
+    // // // Every frame, we create a new velocity for the sprite based on what keys the player is holding down.
+    // // const velocity = new Phaser.Math.Vector2(0, 0);
 
-    if (this.cursorKeys.left.isDown) {
-      velocity.x -= 1;
-    }
-    if (this.cursorKeys.right.isDown) {
-      velocity.x += 1;
-    }
-    if (this.cursorKeys.up.isDown) {
-      velocity.y -= 1;
-    }
-    if (this.cursorKeys.down.isDown) {
-      velocity.y += 1;
-    }
+    // // if (this.cursorKeys.left.isDown) {
+    // //   velocity.x -= 1;
+    // // }
+    // // if (this.cursorKeys.right.isDown) {
+    // //   velocity.x += 1;
+    // // }
+    // // if (this.cursorKeys.up.isDown) {
+    // //   velocity.y -= 1;
+    // // }
+    // // if (this.cursorKeys.down.isDown) {
+    // //   velocity.y += 1;
+    // // }
 
-    // We normalize the velocity so that the player is always moving at the same speed, regardless of direction.
-    const normalizedVelocity = velocity.normalize();
-    this.image.setVelocity(normalizedVelocity.x * this.speed, normalizedVelocity.y * this.speed);
+    // // // We normalize the velocity so that the player is always moving at the same speed, regardless of direction.
+    // // const normalizedVelocity = velocity.normalize();
+    // // this.image.setVelocity(normalizedVelocity.x * this.speed, normalizedVelocity.y * this.speed);
   }
 }
