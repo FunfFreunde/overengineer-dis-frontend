@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: overengineer-frontend
+spec:
+  selector:
+    matchLabels:
+      app: overengineer-frontend
+      app.gitlab.com/app: '$CI_PROJECT_PATH_SLUG'
+      app.gitlab.com/env: '$CI_ENVIRONMENT_SLUG'
+      commit_sha: '$CI_COMMIT_SHA'
+      ci_job_id: '$CI_JOB_ID'
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: overengineer-frontend
+        app.gitlab.com/app: '$CI_PROJECT_PATH_SLUG'
+        app.gitlab.com/env: '$CI_ENVIRONMENT_SLUG'
+        commit_sha: '$CI_COMMIT_SHA'
+        ci_job_id: '$CI_JOB_ID'
+        tier: frontend
+    spec:
+      imagePullSecrets:
+      - name: gitlab-registry
+      containers:
+      - name: overengineer-frontend
+        image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+        imagePullPolicy: "Always"
+        envFrom:
+          - configMapRef:
+              name: overengineer-frontend.configmap

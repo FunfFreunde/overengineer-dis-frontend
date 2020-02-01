@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: overengineer-frontend
+spec:
+  selector:
+    app: overengineer-frontend
+  ports:
+  - protocol: TCP
+    port: 8080
