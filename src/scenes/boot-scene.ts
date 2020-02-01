@@ -73,6 +73,9 @@ export class BootScene extends Phaser.Scene {
     this.load.image('door_slide', 'assets/door.png');
     this.load.image('door_front', 'assets/door.png');
     this.load.image('door_back', 'assets/door.png');
+    this.load.image('menu', 'assets/menu_quad.png');
+
+    // Audio
     this.load.audio('bg_music', ['assets/menu_music.wav']);
   }
 
