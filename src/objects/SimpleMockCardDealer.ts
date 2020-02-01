@@ -1,5 +1,5 @@
 import { CardDealerInterface } from "./CardDealerInterface";
-import { Scene } from "phaser"
+import { Scene, Physics } from "phaser"
 import { Card } from './sprites/Cards/Card';
 import { CardType, TireType, DoorType, PaintJobType, WindowType, EngineType, JokerType } from "./sprites/Cards/CardType";
 import { TireCard } from "./sprites/Cards/TireCard";
@@ -13,24 +13,28 @@ import { WindowCard } from "./sprites/Cards/WindowCard";
 export class SimpleMockCardDealer implements CardDealerInterface{
 
 
-    requestNewCard(scene: Scene, hand: Array<Card>) {
-        console.log('requested new card...');
+    requestNewCard(scene: Scene, hand: Physics.Arcade.Group) {
         if (this.canRequestNewCard(hand)) {
-            hand.push(this._createRandomCard(scene));
-            console.log('new card generated');
-            console.log(hand[0]);
+            hand.add(this._createRandomCard(scene));
         }
     }
 
-    canRequestNewCard(hand: Array<Card>): Boolean {
-        return hand.length < 5;
+    canRequestNewCard(hand: Physics.Arcade.Group): Boolean {
+        return hand.countActive() < 5;
     }
 
-    requestFullHand(scene: Scene): Array<Card> {
-        var hand = new Array<Card>();
+    requestFullHand(scene: Scene): Physics.Arcade.Group {
+        const hand = scene.physics.add.group({
+            classType: Card,
+            runChildUpdate: true,
+            defaultKey: 'card',
+            maxSize: 5
+        });
+
         while (this.canRequestNewCard(hand)) {
             this.requestNewCard(scene, hand);
         }
+        scene.physics.add.collider(hand, hand);
         return hand;
     }
 
@@ -41,12 +45,9 @@ export class SimpleMockCardDealer implements CardDealerInterface{
         }
         // let dice = Math.floor(Math.random() * Math.floor(6));
         let type = randomArrayItem(Object.keys(CardType));
-        console.log(type);
         switch (type) {
             case CardType.DOOR:
-                console.log("DOOR_CARD?");
                 const dspec = randomArrayItem(Object.keys(DoorType));
-                console.log(dspec);
                 return new DoorCard(_scene, dspec);
             case CardType.ENGINE:
                 return new EngineCard(_scene, randomArrayItem(Object.keys(EngineType)));

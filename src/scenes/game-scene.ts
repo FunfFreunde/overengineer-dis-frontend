@@ -25,8 +25,7 @@ export class GameScene extends Phaser.Scene {
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   private image: Phaser.Physics.Arcade.Sprite;
   private _dealer: CardDealerInterface;
-  private _hand: Array<Card>;
-  private _handCardPhysics: Physics.Arcade.Group;
+  private _hand: Physics.Arcade.Group;
 
   constructor() {
     super(sceneConfig);
