@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import Scenes from './scenes';
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
-  title: 'Sample',
+  title: 'OverEngineer',
 
   type: Phaser.AUTO,
 
