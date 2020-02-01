@@ -61,9 +61,9 @@ export class BootScene extends Phaser.Scene {
     // Load sample assets
 
     this.load.image('man', 'assets/character.png');
-    this.load.image('tire_winter', 'assets/tire_winter.png');
-    this.load.image('tire_summer', 'assets/wheel.png');
-    this.load.image('tire_all', 'assets/wheel.png');
+    this.load.image('tire_winter', 'assets/tire_all.png');
+    this.load.image('tire_summer', 'assets/tire_all.png');
+    this.load.image('tire_all', 'assets/tire_all.png');
     this.load.image('window_front', 'assets/window_front.png');
     this.load.image('window_rear', 'assets/window_front.png');
     this.load.image('window_side', 'assets/window_front.png');

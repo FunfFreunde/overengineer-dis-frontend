@@ -48,7 +48,9 @@ export class SimpleMockCardDealer implements CardDealerInterface{
             return idx;
         }
         // let dice = Math.floor(Math.random() * Math.floor(6));
-        let type = randomArrayItem(Object.keys(CardType));
+        let types = [CardType.TIRE, CardType.WINDOW , CardType.DOOR , CardType.PAINT_JOB , CardType.JOKER];
+
+        let type = randomArrayItem(types);
         switch (type) {
             case CardType.DOOR:
                 const dspec = DoorType[randomArrayItem(Object.keys(DoorType))];

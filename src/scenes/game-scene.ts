@@ -132,19 +132,24 @@ export class GameScene extends Phaser.Scene {
       this._eventText.setText('Half-Match!');
       card.discard();
       this._hand.remove(card);
+    this._schleep_do_NOT_do_this(300);
     }
     else if (success === 2) {
       this._eventText.setText('Full-Match!');
       card.discard()
       this._hand.remove(card);
+    this._schleep_do_NOT_do_this(300);
     }
     else if (success === 3) {
       this.onOpponentPlayedCard(Math.floor(Math.random() * 3));
       this._eventText.setText('Not your Turn!!!');
+    this._schleep_do_NOT_do_this(300);
     }
     else {
       this._eventText.setText('No Match!');
+    this._schleep_do_NOT_do_this(300);
     }
+    this._schleep_do_NOT_do_this(300);
     this.onOpponentPlayedCard(Math.floor(1+(3 * Math.random())));
   }
 
@@ -168,5 +173,9 @@ export class GameScene extends Phaser.Scene {
   {
     let card = new OpponentCard(this, 0, 0);
     return card;
+  }
+
+  async _schleep_do_NOT_do_this(time: number) {
+    await new Promise(resolve => setTimeout(resolve, time));
   }
 }

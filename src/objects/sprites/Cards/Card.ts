@@ -15,7 +15,7 @@ export class Card extends Physics.Arcade.Sprite {
         protected readonly _spriteName: string,
     ) {
         //TODO replace 'tire_winter' with actual sprite name for card type
-        super(_parentScene, posX, posY, 'man');
+        super(_parentScene, posX, posY, _spriteName);
         console.log(_spriteName);
         this._parentScene = _parentScene;
         this._type = _type;
