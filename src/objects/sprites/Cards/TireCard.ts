@@ -9,9 +9,11 @@ export class TireCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _tireType: TireType
     ) {
-        super(_parentScene, CardType.TIRE, _tireType);
+        super(_parentScene, posX, posY, CardType.TIRE, _tireType);
         this._parentScene = _parentScene;
     };
 }

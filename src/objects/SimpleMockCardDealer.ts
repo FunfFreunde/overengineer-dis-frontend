@@ -12,10 +12,17 @@ import { WindowCard } from "./sprites/Cards/WindowCard";
 
 export class SimpleMockCardDealer implements CardDealerInterface{
 
+    private lastX: number;
+
+    constructor() {
+        this.lastX = 200;
+    }
+
 
     requestNewCard(scene: Scene, hand: Physics.Arcade.Group) {
         if (this.canRequestNewCard(hand)) {
-            hand.add(this._createRandomCard(scene));
+            hand.add(this._createRandomCard(scene, this.lastX, 800));
+            this.lastX += 500;
         }
     }
 
@@ -38,7 +45,7 @@ export class SimpleMockCardDealer implements CardDealerInterface{
         return hand;
     }
 
-    private _createRandomCard(_scene: Scene): Card {
+    private _createRandomCard(_scene: Scene, posX, posY): Card {
         var randomArrayItem = (array) => {
             let idx = array[Math.floor(Math.random() * array.length)];
             return idx;
@@ -48,19 +55,19 @@ export class SimpleMockCardDealer implements CardDealerInterface{
         switch (type) {
             case CardType.DOOR:
                 const dspec = randomArrayItem(Object.keys(DoorType));
-                return new DoorCard(_scene, dspec);
+                return new DoorCard(_scene, posX, posY, dspec);
             case CardType.ENGINE:
-                return new EngineCard(_scene, randomArrayItem(Object.keys(EngineType)));
+                return new EngineCard(_scene, posX, posY, randomArrayItem(Object.keys(EngineType)));
             case CardType.JOKER:
-                return new JokerCard(_scene, randomArrayItem(Object.keys(JokerType)));
+                return new JokerCard(_scene, posX, posY, randomArrayItem(Object.keys(JokerType)));
             case CardType.PAINT_JOB:
-                return new PaintJobCard(_scene, randomArrayItem(Object.keys(PaintJobType)));
+                return new PaintJobCard(_scene,posX, posY, randomArrayItem(Object.keys(PaintJobType)));
             case CardType.TIRE:
-                return new TireCard(_scene, randomArrayItem(Object.keys(TireType)));
+                return new TireCard(_scene, posX, posY, randomArrayItem(Object.keys(TireType)));
             case CardType.WINDOW:
-                return new WindowCard(_scene, randomArrayItem(Object.keys(WindowType)));
+                return new WindowCard(_scene, posX, posY, randomArrayItem(Object.keys(WindowType)));
             default:
-                return new WindowCard(_scene, randomArrayItem(Object.keys(WindowType)));
+                return new WindowCard(_scene, posX, posY, randomArrayItem(Object.keys(WindowType)));
         }
     }
 }

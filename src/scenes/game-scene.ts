@@ -36,6 +36,7 @@ export class GameScene extends Phaser.Scene {
     this._setupHandCards();
     this._drawHandCards();
     this._setupCollision();
+    this._orderHandCards();
   }
 
   private _setupHandCards() {
@@ -43,6 +44,9 @@ export class GameScene extends Phaser.Scene {
 
   private _setupCollision() {
     this.physics.add.collider(this._hand, this._hand);
+  }
+
+  private _orderHandCards() {
   }
 
   private _drawHandCards() {

@@ -10,9 +10,11 @@ export class PaintJobCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _paintJobType: PaintJobType
     ) {
-        super(_parentScene, CardType.PAINT_JOB, _paintJobType);
+        super(_parentScene, posX, posY, CardType.PAINT_JOB, _paintJobType);
         this._parentScene = _parentScene;
     };
 }

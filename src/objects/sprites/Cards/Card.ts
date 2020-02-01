@@ -8,11 +8,13 @@ export class Card extends Physics.Arcade.Sprite {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _type: CardType,
         protected readonly _spriteName: string,
     ) {
         //TODO replace 'tire_winter' with actual sprite name for card type
-        super(_parentScene, 200, 800, 'tire_winter');
+        super(_parentScene, posX, posY, 'tire_winter');
         this._parentScene = _parentScene;
         this._type = _type;
         this._spriteName = _spriteName;
@@ -20,7 +22,6 @@ export class Card extends Physics.Arcade.Sprite {
         _parentScene.add.existing(this);
         this.setInteractive();
         _parentScene.input.setDraggable(this);
-        this.body.touching.down = true;
         _parentScene.input.on('drag', this.onDrag);
 
         _parentScene.input.on('dragstart', this.onDragStart);

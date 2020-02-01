@@ -8,9 +8,11 @@ export class JokerCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _jokerType: JokerType
     ) {
-        super(_parentScene, CardType.JOKER, _jokerType);
+        super(_parentScene, posX, posY, CardType.JOKER, _jokerType);
         this._parentScene = _parentScene;
     };
 }

@@ -10,9 +10,11 @@ export class WindowCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _windowType: WindowType
     ) {
-        super(_parentScene, CardType.WINDOW, _windowType);
+        super(_parentScene, posX, posY, CardType.WINDOW, _windowType);
         this._parentScene = _parentScene;
     };
 }

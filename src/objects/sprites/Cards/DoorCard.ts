@@ -9,9 +9,11 @@ export class DoorCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _doorType: DoorType
     ) {
-        super(_parentScene, CardType.DOOR, _doorType);
+        super(_parentScene, posX, posY, CardType.DOOR, _doorType);
         this._parentScene = _parentScene;
     };
 }

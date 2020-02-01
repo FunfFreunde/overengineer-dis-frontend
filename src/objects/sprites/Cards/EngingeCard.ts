@@ -10,9 +10,11 @@ export class EngineCard extends Card {
 
     constructor(
         _parentScene: Scene,
+        posX: number,
+        posY: number,
         private readonly _engineType: EngineType
     ) {
-        super(_parentScene, CardType.ENGINE, _engineType);
+        super(_parentScene, posX, posY, CardType.ENGINE, _engineType);
         this._parentScene = _parentScene;
     };
 }
