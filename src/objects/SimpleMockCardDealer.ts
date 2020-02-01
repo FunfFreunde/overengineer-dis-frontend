@@ -51,20 +51,20 @@ export class SimpleMockCardDealer implements CardDealerInterface{
         let type = randomArrayItem(Object.keys(CardType));
         switch (type) {
             case CardType.DOOR:
-                const dspec = randomArrayItem(Object.keys(DoorType));
+                const dspec = DoorType[randomArrayItem(Object.keys(DoorType))];
                 return new DoorCard(_scene, posX, posY, dspec);
             case CardType.ENGINE:
-                return new EngineCard(_scene, posX, posY, randomArrayItem(Object.keys(EngineType)));
+                return new EngineCard(_scene, posX, posY, EngineType[randomArrayItem(Object.keys(EngineType))]);
             case CardType.JOKER:
-                return new JokerCard(_scene, posX, posY, randomArrayItem(Object.keys(JokerType)));
+                return new JokerCard(_scene, posX, posY, JokerType[randomArrayItem(Object.keys(JokerType))]);
             case CardType.PAINT_JOB:
-                return new PaintJobCard(_scene,posX, posY, randomArrayItem(Object.keys(PaintJobType)));
+                return new PaintJobCard(_scene,posX, posY, PaintJobType[randomArrayItem(Object.keys(PaintJobType))]);
             case CardType.TIRE:
-                return new TireCard(_scene, posX, posY, randomArrayItem(Object.keys(TireType)));
+                return new TireCard(_scene, posX, posY, TireType[randomArrayItem(Object.keys(TireType))]);
             case CardType.WINDOW:
-                return new WindowCard(_scene, posX, posY, randomArrayItem(Object.keys(WindowType)));
+                return new WindowCard(_scene, posX, posY, WindowType[randomArrayItem(Object.keys(WindowType))]);
             default:
-                return new WindowCard(_scene, posX, posY, randomArrayItem(Object.keys(WindowType)));
+                return new WindowCard(_scene, posX, posY, WindowType[randomArrayItem(Object.keys(WindowType))]);
         }
     }
 }

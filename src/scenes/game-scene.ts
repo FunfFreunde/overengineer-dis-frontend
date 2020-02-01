@@ -41,6 +41,7 @@ export class GameScene extends Phaser.Scene {
 
   private _displayOpponentCardBacks() {
     this._opponentHands = new Array<Physics.Arcade.Group>();
+    //TODO this is the Mock for Opposing player "displays"
     [1, 2, 3].map((idx) => {
       let hand = this.physics.add.group({
         classType: Card,
@@ -53,15 +54,39 @@ export class GameScene extends Phaser.Scene {
         hand.add(card);
       }
       this._opponentHands[idx] = hand;
-      let gridConf = {
-        height: 1,
-        width: 100,
-        cellWidth: 64,
-        cellHeight: 64,
-        x: 200,
-        y: 64
+      if (idx === 1) {
+        let gridConf = {
+          height: 1,
+          width: 100,
+          cellWidth: 64,
+          cellHeight: 64,
+          x: getGameWidth(this) /2,
+          y: 64
+        }
+        Phaser.Actions.GridAlign(hand.getChildren(), gridConf);
       }
-      Phaser.Actions.GridAlign(hand.getChildren(), gridConf);
+      else if (idx === 2) {
+        let gridConf = {
+          height: 100,
+          width: 1,
+          cellWidth: 64,
+          cellHeight: 64,
+          x: 64,
+          y: 128
+        }
+        Phaser.Actions.GridAlign(hand.getChildren(), gridConf);
+      }
+      else {
+        let gridConf = {
+          height: 100,
+          width: 1,
+          cellWidth: 64,
+          cellHeight: 64,
+          x: getGameWidth(this) - 128,
+          y: 128
+        }
+        Phaser.Actions.GridAlign(hand.getChildren(), gridConf);
+      }
     });
   }
 
@@ -87,6 +112,17 @@ export class GameScene extends Phaser.Scene {
   }
 
   /**
+   * opponentID: number
+   */
+  public onOpponentPlayedCard(opponentID: number) {
+    this._eventText.setText('Player: ' + opponentID + ' played...');
+    let hand = this._opponentHands[opponentID];
+    let played = hand.getChildren().pop();
+    if (played instanceof Card) {
+      played.discard();
+    }
+  }
+  /**
    * 
    */
   public tryPlayCard(card: Card) {
@@ -102,12 +138,14 @@ export class GameScene extends Phaser.Scene {
       card.discard()
       this._hand.remove(card);
     }
-    else if (success === 3){
+    else if (success === 3) {
+      this.onOpponentPlayedCard(Math.floor(Math.random() * 3));
       this._eventText.setText('Not your Turn!!!');
     }
     else {
       this._eventText.setText('No Match!');
     }
+    this.onOpponentPlayedCard(Math.floor(1+(3 * Math.random())));
   }
 
   public update() {
@@ -121,8 +159,8 @@ export class GameScene extends Phaser.Scene {
       width: 100,
       cellWidth: 64,
       cellHeight: 64,
-      x: 200,
-      y: 700
+      x: getGameWidth(this)/ 2 + 128,
+      y: getGameHeight(this) - 128
     });
   }
 

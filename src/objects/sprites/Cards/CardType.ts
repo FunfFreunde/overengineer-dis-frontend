@@ -8,27 +8,27 @@ export enum CardType  {
 };
 
 export enum JokerType {
-    APPRENTICE = 'apprentice',
-    SHODDY = 'shoddy',
-    CANCEL = 'cancel'
+    APPRENTICE = 'joker_apprentice',
+    SHODDY = 'joker_shoddy',
+    CANCEL = 'joker_cancel'
 }
 
 export  enum TireType {
-    SUMMER = 'summer',
+    SUMMER = 'tire_summer',
     WINTER = 'tire_winter',
-    ALL = 'all'
+    ALL = 'tire_all'
 }
 
 export enum WindowType {
-    FRONT = 'front',
-    REAR = 'rear',
-    SIDE = 'side'
+    FRONT = 'window_front',
+    REAR = 'window_rear',
+    SIDE = 'window_side'
 }
 
 export enum EngineType {
-    DIESEL = 'diesel',
-    GASOLINE = 'gas',
-    ELECTRONIC = 'electronic'
+    DIESEL = 'engine_diesel',
+    GASOLINE = 'engine_gas',
+    ELECTRONIC = 'engine_electronic'
 }
 
 export enum DoorType {

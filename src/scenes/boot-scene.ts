@@ -60,9 +60,19 @@ export class BootScene extends Phaser.Scene {
   private loadAssets() {
     // Load sample assets
 
-    // Source: Open Game Art
     this.load.image('man', 'assets/character.png');
     this.load.image('tire_winter', 'assets/tire_winter.png');
+    this.load.image('tire_summer', 'assets/wheel.png');
+    this.load.image('tire_all', 'assets/wheel.png');
+    this.load.image('window_front', 'assets/window_front.png');
+    this.load.image('window_rear', 'assets/window_front.png');
+    this.load.image('window_side', 'assets/window_front.png');
+    this.load.image('engine_gas', 'assets/engine.png');
+    this.load.image('engine_electro', 'assets/engine.png');
+    this.load.image('engine_diesel', 'assets/engine.png');
+    this.load.image('door_slide', 'assets/door.png');
+    this.load.image('door_front', 'assets/door.png');
+    this.load.image('door_back', 'assets/door.png');
   }
 
 }
