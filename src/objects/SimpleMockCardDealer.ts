@@ -12,23 +12,20 @@ import { WindowCard } from "./sprites/Cards/WindowCard";
 
 export class SimpleMockCardDealer implements CardDealerInterface{
 
-    private lastX: number;
-
     constructor() {
-        this.lastX = 200;
     }
 
 
     requestNewCard(scene: Scene, hand: Physics.Arcade.Group) {
         if (this.canRequestNewCard(hand)) {
-            hand.add(this._createRandomCard(scene, this.lastX, 800));
-            this.lastX += 500;
+            hand.add(this._createRandomCard(scene, 0, 800));
         }
     }
 
     canRequestNewCard(hand: Physics.Arcade.Group): Boolean {
         return hand.countActive() < 5;
     }
+
 
     requestFullHand(scene: Scene): Physics.Arcade.Group {
         const hand = scene.physics.add.group({

@@ -1,5 +1,6 @@
 import { CardType } from "./CardType";
 import { Physics, Scene } from "phaser";
+import { GameScene } from "../../../scenes/game-scene";
 
 
 export class Card extends Physics.Arcade.Sprite {
@@ -18,6 +19,7 @@ export class Card extends Physics.Arcade.Sprite {
         this._parentScene = _parentScene;
         this._type = _type;
         this._spriteName = _spriteName;
+        this.setDisplaySize(64, 64);
         _parentScene.physics.add.existing(this);
         _parentScene.add.existing(this);
         this.setInteractive();
@@ -26,6 +28,7 @@ export class Card extends Physics.Arcade.Sprite {
 
         _parentScene.input.on('dragstart', this.onDragStart);
         _parentScene.input.on('dragend', this.onDragRelease);
+        this.setSize(64, 64);
     }
 
     onDrag(pointer: any, gameObject: Card, dragX: number, dragY: number) {
@@ -39,6 +42,19 @@ export class Card extends Physics.Arcade.Sprite {
 
     onDragRelease(pointer: any, gameObject: Card) {
         gameObject.clearTint();
+        if (this._parentScene instanceof GameScene) {
+            this._parentScene.onResetGrid();
+        }
+    }
+
+    /**
+     * 
+     */
+    public discard() {
+        this.setActive(false);
+        this.setVisible(false);
+        this.removeAllListeners();
+        this.setInteractive(false);
     }
 
     update() {
