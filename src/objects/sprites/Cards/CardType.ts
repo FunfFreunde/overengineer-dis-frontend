@@ -1,4 +1,4 @@
-export const enum CardType  {
+export enum CardType  {
     TIRE = 'tire',
     WINDOW = 'window',
     ENGINE = 'engine',
@@ -7,31 +7,37 @@ export const enum CardType  {
     JOKER = 'joker'
 };
 
-export const enum TireType {
+export enum JokerType {
+    APPRENTICE = 'apprentice',
+    SHODDY = 'shoddy',
+    CANCEL = 'cancel'
+}
+
+export  enum TireType {
     SUMMER = 'summer',
-    WINTER = 'winter',
+    WINTER = 'tire_winter',
     ALL = 'all'
 }
 
-export const enum WindowType {
+export enum WindowType {
     FRONT = 'front',
     REAR = 'rear',
     SIDE = 'side'
 }
 
-export const enum EngineType {
+export enum EngineType {
     DIESEL = 'diesel',
     GASOLINE = 'gas',
     ELECTRONIC = 'electronic'
 }
 
-export const enum DoorType {
-    SLIDER = 'slide',
-    FRONT = 'front',
-    REAR = 'rear'
+export enum DoorType {
+    SLIDER = 'tire_winter',
+    FRONT = 'tire_winter',
+    REAR = 'tire_winter'
 }
 
-export const enum PaintJobType {
+export  enum PaintJobType {
     RED = 'r',
     GREEN = 'g',
     BLUE = 'b',

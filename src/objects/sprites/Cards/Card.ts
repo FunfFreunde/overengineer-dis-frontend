@@ -11,10 +11,11 @@ export abstract class Card extends Physics.Arcade.Sprite {
         private readonly _type: CardType,
         protected readonly _spriteName: string,
     ) {
-        super(_parentScene, 0, 0, _spriteName);
+        super(_parentScene, 100, 100, _spriteName);
         this._parentScene = _parentScene;
         this._type = _type;
         this._spriteName = _spriteName;
+        // this._parentScene.physics.add.sprite(0, 0, _spriteName);
     };
 
 }

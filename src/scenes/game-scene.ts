@@ -2,7 +2,9 @@ import { Input } from 'phaser';
 import { getGameWidth, getGameHeight } from '../helpers';
 import { Card } from '../objects/sprites/Cards/Card';
 import { TireCard } from '../objects/sprites/Cards/TireCard';
-import { TireType } from '../objects/sprites/Cards/CardType';
+import { CardType, TireType } from '../objects/sprites/Cards/CardType';
+import { CardDealerInterface } from '../objects/CardDealerInterface';
+import { SimpleMockCardDealer } from '../objects/SimpleMockCardDealer';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -16,22 +18,35 @@ export class GameScene extends Phaser.Scene {
 
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   private image: Phaser.Physics.Arcade.Sprite;
-
-  private hand: Array<Card>;
+  private _dealer: CardDealerInterface;
+  private _hand: Array<Card>;
 
   constructor() {
     super(sceneConfig);
   }
 
   public create() {
-    this.hand = [];
     // Add a player sprite that can be moved around. Place him in the middle of the screen.
     this.image = this.physics.add.sprite(getGameWidth(this) / 2, getGameHeight(this) / 2, 'man');
 
     // This is a nice helper Phaser provides to create listeners for some of the most common keys.
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.hand.push(new TireCard(this, TireType.WINTER));
-    console.log(this.hand);
+
+    // This is a nice helper Phaser provides to create listeners for some of the most common keys.
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this._setupHandCards();
+    this._drawHandCards();
+    // this.hand.push(new TireCard(this, TireType.WINTER));
+        // console.log(Object.keys(CardType));
+  }
+
+  private _setupHandCards() {
+  }
+
+  private _drawHandCards() {
+    this._dealer = new SimpleMockCardDealer();
+    this._hand = this._dealer.requestFullHand(this);
+    console.log(this._hand);
   }
 
   public update() {
