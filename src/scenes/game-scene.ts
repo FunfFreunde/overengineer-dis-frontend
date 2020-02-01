@@ -22,13 +22,27 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 export class GameScene extends Phaser.Scene {
 
   private _dropZone: Phaser.Physics.Arcade.Sprite;
+  private _clock: Phaser.Time.Clock;
+  private _lastBeat: number;
   private _eventText: Phaser.GameObjects.Text;
   private _dealer: CardDealerInterface;
   private _hand: Physics.Arcade.Group;
   private _opponentHands: Array<Physics.Arcade.Group>;
+  private _ws: WebSocket;
 
   constructor() {
     super(sceneConfig);
+  }
+
+  private onServerMessage(message) {
+    console.log(message);
+    var data = JSON.parse(message.data);
+    console.log(data);
+    //TODO Event handling!
+  }
+
+  private onConnectToGame(event) {
+    this._eventText.setText("Connected successfully to game!");
   }
 
   public create() {
@@ -37,6 +51,23 @@ export class GameScene extends Phaser.Scene {
     this._setupCollision();
     this._displayOpponentCardBacks();
     this.onResetGrid();
+    this._clock = new Phaser.Time.Clock(this);
+    this._ws = new WebSocket('ws://localhost:8081');
+    this._ws.onopen = (event) => {
+      this.onConnectToGame(event);
+      this._lastBeat = this._clock.now;
+    };
+
+    this._ws.onerror = (event) => {
+      alert("socket error\n\n" + event);
+    };
+
+
+
+    this._ws.onmessage = (message: MessageEvent) => {
+      this.onServerMessage(message);
+
+    };
   }
 
   private _displayOpponentCardBacks() {
@@ -126,47 +157,42 @@ export class GameScene extends Phaser.Scene {
    * 
    */
   public tryPlayCard(card: Card) {
-    let success = Math.floor(Math.random() * 4);
-    card.setActive(false);
-    if (success === 1) {
-      this._eventText.setText('Half-Match!');
-      card.discard();
-      this._hand.remove(card);
-    this._schleep_do_NOT_do_this(300);
-    }
-    else if (success === 2) {
-      this._eventText.setText('Full-Match!');
-      card.discard()
-      this._hand.remove(card);
-    this._schleep_do_NOT_do_this(300);
-    }
-    else if (success === 3) {
-      this.onOpponentPlayedCard(Math.floor(Math.random() * 3));
-      this._eventText.setText('Not your Turn!!!');
-    this._schleep_do_NOT_do_this(300);
-    }
-    else {
-      this._eventText.setText('No Match!');
-    this._schleep_do_NOT_do_this(300);
-    }
-    this._schleep_do_NOT_do_this(300);
-    this.onOpponentPlayedCard(Math.floor(1+(3 * Math.random())));
+    this._ws.send(JSON.stringify({foo: 1, bar:2
+    }));
+    // let success = Math.floor(Math.random() * 4);
+    // card.setActive(false);
+    // if (success === 1) {
+    //   this._eventText.setText('Half-Match!');
+    //   card.discard();
+    //   this._hand.remove(card);
+    // this._schleep_do_NOT_do_this(300);
+    // }
+    // else if (success === 2) {
+    //   this._eventText.setText('Full-Match!');
+    //   card.discard()
+    //   this._hand.remove(card);
+    // this._schleep_do_NOT_do_this(300);
+    // }
+    // else if (success === 3) {
+    //   this.onOpponentPlayedCard(Math.floor(Math.random() * 3));
+    //   this._eventText.setText('Not your Turn!!!');
+    // this._schleep_do_NOT_do_this(300);
+    // }
+    // else {
+    //   this._eventText.setText('No Match!');
+    // this._schleep_do_NOT_do_this(300);
+    // }
+    // this._schleep_do_NOT_do_this(300);
+    // this.onOpponentPlayedCard(Math.floor(1+(3 * Math.random())));
   }
 
   public update() {
+    //HEARTBEAT
+    if ((this._clock.now - this._lastBeat) > 10) {
+      this._ws.send(JSON.stringify({ ping: 1000 }));
+      this._lastBeat = this._clock.now;
+    }
 
-  }
-
-  public onResetGrid() {
-
-    Phaser.Actions.GridAlign(this._hand.getChildren(), {
-      height: 1,
-      width: 100,
-      cellWidth: 64,
-      cellHeight: 64,
-      x: getGameWidth(this)/ 2 + 128,
-      y: getGameHeight(this) - 128
-    });
   }
 
   private createOpponentViewCard()
@@ -177,5 +203,17 @@ export class GameScene extends Phaser.Scene {
 
   async _schleep_do_NOT_do_this(time: number) {
     await new Promise(resolve => setTimeout(resolve, time));
+  }
+
+  public onResetGrid() {
+
+    Phaser.Actions.GridAlign(this._hand.getChildren(), {
+      height: 1,
+      width: 100,
+      cellWidth: 64,
+      cellHeight: 64,
+      x: getGameWidth(this) / 2 + 128,
+      y: getGameHeight(this) - 128
+    });
   }
 }
