@@ -1,6 +1,6 @@
 
 import { Card } from "./Card";
-import { JokerType, CardType } from "./CardType";
+import { CardType, DoorType } from "./CardType";
 import { Scene } from "phaser";
 
 

@@ -2,7 +2,7 @@ import { CardType } from "./CardType";
 import { Physics, Scene } from "phaser";
 
 
-export abstract class Card extends Physics.Arcade.Sprite {
+export class Card extends Physics.Arcade.Sprite {
 
     protected _parentScene: Scene
 
@@ -15,7 +15,8 @@ export abstract class Card extends Physics.Arcade.Sprite {
         this._parentScene = _parentScene;
         this._type = _type;
         this._spriteName = _spriteName;
-        // this._parentScene.physics.add.sprite(0, 0, _spriteName);
+        _parentScene.add.existing(this);
+        console.log(_spriteName);
     };
 
 }

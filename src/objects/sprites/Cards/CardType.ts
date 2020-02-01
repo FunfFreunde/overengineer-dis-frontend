@@ -1,10 +1,10 @@
 export enum CardType  {
-    TIRE = 'tire',
-    WINDOW = 'window',
-    ENGINE = 'engine',
-    DOOR = 'door',
-    PAINT_JOB = 'paint',
-    JOKER = 'joker'
+    TIRE,
+    WINDOW,
+    ENGINE,
+    DOOR,
+    PAINT_JOB,
+    JOKER
 };
 
 export enum JokerType {

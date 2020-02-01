@@ -12,11 +12,6 @@ import { WindowCard } from "./sprites/Cards/WindowCard";
 
 export class SimpleMockCardDealer implements CardDealerInterface{
 
-    constructor(_parentScene: Scene, _playerHand: Array<Card>) {
-        this._parentScene = _parentScene;
-        this._playerHand = _playerHand;
-    }
-
 
     requestNewCard(scene: Scene, hand: Array<Card>) {
         console.log('requested new card...');
@@ -40,16 +35,19 @@ export class SimpleMockCardDealer implements CardDealerInterface{
     }
 
     private _createRandomCard(_scene: Scene): Card {
-        let randomArrayItem = (array) => {
-            return array[Math.floor(Math.random() * array.length)];
-        };
+        var randomArrayItem = (array) => {
+            let idx = array[Math.floor(Math.random() * array.length)];
+            return idx;
+        }
         // let dice = Math.floor(Math.random() * Math.floor(6));
         let type = randomArrayItem(Object.keys(CardType));
+        console.log(type);
         switch (type) {
             case CardType.DOOR:
+                console.log("DOOR_CARD?");
                 const dspec = randomArrayItem(Object.keys(DoorType));
-                _scene.physics.add.sprite(200, 200, dspec);
-                return _scene.add.sprite(0, 0, new DoorCard(_scene, dspec));
+                console.log(dspec);
+                return new DoorCard(_scene, dspec);
             case CardType.ENGINE:
                 return new EngineCard(_scene, randomArrayItem(Object.keys(EngineType)));
             case CardType.JOKER:
@@ -59,6 +57,8 @@ export class SimpleMockCardDealer implements CardDealerInterface{
             case CardType.TIRE:
                 return new TireCard(_scene, randomArrayItem(Object.keys(TireType)));
             case CardType.WINDOW:
+                return new WindowCard(_scene, randomArrayItem(Object.keys(WindowType)));
+            default:
                 return new WindowCard(_scene, randomArrayItem(Object.keys(WindowType)));
         }
     }
