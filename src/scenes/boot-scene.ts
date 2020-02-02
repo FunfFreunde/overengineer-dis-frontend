@@ -84,6 +84,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('order_card', 'assets/order_card.png');
     this.load.image('card_unknown', 'assets/card_unknown.png');
     this.load.image('menu', 'assets/menu_quad.png');
+    this.load.image('credits', 'assets/credits.png');
 
     // Audio
     this.load.audio('bg_music', ['assets/menu_music.wav']);

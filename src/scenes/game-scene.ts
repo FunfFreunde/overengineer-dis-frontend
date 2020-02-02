@@ -8,13 +8,14 @@ import { WebSocketCardDealer } from '../objects/WebSocketCardDealer';
 import { OpponentCard } from '../objects/sprites/Cards/OpponentCard';
 import { MenuButton } from '../ui/menu-button';
 
+
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
   visible: false,
   physics: {
     default: "arcade",
     arcade: {
-      debug: true
+      debug: false
     }
   },
   key: 'Game',
@@ -88,7 +89,7 @@ export class GameScene extends Phaser.Scene {
     })
     this.game_music.pause();
     musicState() != 'false' ? this.game_music.resume() : this.game_music.pause();
-
+    this.add.text(80, getGameHeight(this)*0.95, 'waiting for data....', { fill: '#00000'}).setFontSize(18);
     new MenuButton(this, getGameWidth(this) - 250, getGameHeight(this)-50, 'Exit', () => {
       this.game_music.stop();
       this.scene.switch('MainMenu');
@@ -181,8 +182,7 @@ export class GameScene extends Phaser.Scene {
    * 
    */
   public tryPlayCard(card: Card) {
-    this._ws.send(JSON.stringify({foo: 1, bar:2
-    }));
+   
     // let success = Math.floor(Math.random() * 4);
     // card.setActive(false);
     // if (success === 1) {
@@ -213,7 +213,7 @@ export class GameScene extends Phaser.Scene {
   public update() {
     //HEARTBEAT
     if ((this._clock.now - this._lastBeat) > 10) {
-      this._ws.send(JSON.stringify({ ping: 1000 }));
+//      this._ws.send(JSON.stringify({ ping: 1000 }));
       this._lastBeat = this._clock.now;
     }
 

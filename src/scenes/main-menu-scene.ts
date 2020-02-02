@@ -51,6 +51,6 @@ export class MainMenuScene extends Phaser.Scene {
       this.scene.switch('Settings');
     });
 
-    new MenuButton(this, 100, 450, 'Help', () => console.log());
+    new MenuButton(this, 100, 450, 'Help', () => window.location.href = "https://github.com/FunfFreunde");
   }
 }
