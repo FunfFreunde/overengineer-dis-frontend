@@ -28,18 +28,18 @@ export enum WindowType {
 export enum EngineType {
     DIESEL = 'engine_diesel',
     GASOLINE = 'engine_gas',
-    ELECTRONIC = 'engine_electronic'
+    ELECTRONIC = 'engine_electric'
 }
 
 export enum DoorType {
-    SLIDER = 'tire_winter',
-    FRONT = 'tire_winter',
-    REAR = 'tire_winter'
+    SLIDER = 'door_slide',
+    FRONT = 'door_front',
+    REAR = 'door_rear'
 }
 
 export  enum PaintJobType {
-    RED = 'r',
-    GREEN = 'g',
-    BLUE = 'b',
-    YELLOW = 'y'
+    RED = 'paint_red',
+    GREEN = 'paint_green',
+    BLUE = 'paint_blue',
+    YELLOW = 'paint_yellow'
 }
