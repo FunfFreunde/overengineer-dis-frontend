@@ -53,6 +53,11 @@ export class GameScene extends Phaser.Scene {
       console.log('')
       this._dealer = new WebSocketCardDealer()
       this._hand = this._dealer.requestFullHand(this, data);
+      this._createDropZone();
+      this._setupCollision();
+      this._displayOpponentCardBacks();
+      this._setupOrderCard();
+      this.onResetGrid();
     }
     console.log(data);
     //TODO Event handling!
@@ -63,18 +68,18 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create() {
-    this.size = getGameHeight(this)/4;
-    this._createDropZone();
-    this._setupCollision();
-    this._displayOpponentCardBacks();
-    this._setupOrderCard();
-    this.onResetGrid();
-    this._clock = new Phaser.Time.Clock(this);
       this._ws = new WebSocket('ws://overengineer.wtf/backend/join');
     this._ws.onopen = (event) => {
       this.onConnectToGame(event);
       this._lastBeat = this._clock.now;
+    };    this.size = getGameHeight(this)/4;
+    this._ws.onmessage = (message: MessageEvent) => {
+      this.onServerMessage(message);
+
     };
+
+    this._clock = new Phaser.Time.Clock(this);
+
 
     this.game_music = this.sound.add('game_music');
     this.game_music.play({
@@ -89,10 +94,6 @@ export class GameScene extends Phaser.Scene {
       this.scene.switch('MainMenu');
     });
 
-    this._ws.onmessage = (message: MessageEvent) => {
-      this.onServerMessage(message);
-
-    };
   }
 
   private _displayOpponentCardBacks() {
