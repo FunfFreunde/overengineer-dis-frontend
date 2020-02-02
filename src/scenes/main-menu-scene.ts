@@ -43,7 +43,7 @@ export class MainMenuScene extends Phaser.Scene {
       
     });
 
-    new MenuButton(this, 100, 250, 'OUR Game', ()  => {
+    new MenuButton(this, 100, 250, 'About', ()  => {
       this.scene.switch('OurGame');
     });
 
