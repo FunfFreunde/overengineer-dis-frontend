@@ -52,7 +52,7 @@ export class GameScene extends Phaser.Scene {
     this._displayOpponentCardBacks();
     this.onResetGrid();
     this._clock = new Phaser.Time.Clock(this);
-    this._ws = new WebSocket('wss://overengineer.fsn.k8s.ciapa.tech');
+      this._ws = new WebSocket('wss://overengineer.wtf/backend/join');
     this._ws.onopen = (event) => {
       this.onConnectToGame(event);
       this._lastBeat = this._clock.now;
