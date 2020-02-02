@@ -71,11 +71,10 @@ export class GameScene extends Phaser.Scene {
     this.game_music.pause();
     musicState() != 'false' ? this.game_music.resume() : this.game_music.pause();
 
-    this._ws.onerror = (event) => {
-      alert("socket error\n\n" + event);
-    };
-
-
+    new MenuButton(this, getGameWidth(this) - 250, getGameHeight(this)-50, 'Exit', () => {
+      this.game_music.stop();
+      this.scene.switch('MainMenu');
+    });
 
     this._ws.onmessage = (message: MessageEvent) => {
       this.onServerMessage(message);
