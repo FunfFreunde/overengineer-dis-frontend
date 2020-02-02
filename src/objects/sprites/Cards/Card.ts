@@ -18,7 +18,7 @@ export class Card extends Physics.Arcade.Sprite {
         this._parentScene = _parentScene;
         this._type = _type;
         this._spriteName = _spriteName;
-        this.setDisplaySize(64, 64);
+        this.setDisplaySize(206, 313);
         _parentScene.physics.add.existing(this);
         _parentScene.add.existing(this);
         this.setInteractive();
