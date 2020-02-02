@@ -16,14 +16,14 @@ export class Settings extends Phaser.Scene {
     }
 
     public create() {
-        this.add.text(getGameWidth(this)/4.5, getGameHeight(this)/2+200, '[i] This game was developed on the GlobalGameJam 2020!', { fill: '#FFFFFF' }).setFontSize(24);
+        this.add.text(300, 150, 'Settings', { fill: '#FFFFFF'}).setFontSize(45);
 
         new MenuButton(this, 100, 250, 'Music ON/OFF', ()  => {
             musicState("true");
             console.log(musicState());
           });
 
-          new MenuButton(this, getGameWidth(this)/2.25, getGameHeight(this)/2+250, '<= Back', () => {
+          new MenuButton(this, getGameWidth(this)/2.25, getGameHeight(this)/2+250, 'Save', () => {
             this.scene.switch('MainMenu');
           });
     }
