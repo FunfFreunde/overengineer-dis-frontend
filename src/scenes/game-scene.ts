@@ -162,11 +162,6 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
-  private _drawHandCards() {
-    this._dealer = new SimpleMockCardDealer();
-    this._hand = this._dealer.requestFullHand(this);
-  }
-
   private _setupOrderCard(){
     var order_card = this.add.sprite((getGameWidth(this)*0.05)+(120), getGameHeight(this)*0.95, 'order_card').setDisplaySize(800*1.5, 550*1.5);  }
 
