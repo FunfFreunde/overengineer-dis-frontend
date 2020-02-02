@@ -6,6 +6,7 @@ import { CardType, TireType } from '../objects/sprites/Cards/CardType';
 import { CardDealerInterface } from '../objects/CardDealerInterface';
 import { WebSocketCardDealer } from '../objects/WebSocketCardDealer';
 import { OpponentCard } from '../objects/sprites/Cards/OpponentCard';
+import { MenuButton } from '../ui/menu-button';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
