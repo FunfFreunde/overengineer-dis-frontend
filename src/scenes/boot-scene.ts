@@ -31,7 +31,7 @@ export class BootScene extends Phaser.Scene {
     this.load.on('progress', (value) => {
       progressBar.width = (progressBarWidth - 30) * value;
 
-      const percent = Math.round(value) * 100;
+      const percent = Math.round(value*100);
       percentText.setText(`${percent}%`);
     });
 
@@ -68,7 +68,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('window_rear', 'assets/window_rear.png');
     this.load.image('window_side', 'assets/window_side.png');
     this.load.image('engine_gas', 'assets/engine_gas.png');
-    this.load.image('engine_electro', 'assets/engine_electro.png');
+    this.load.image('engine_electric', 'assets/engine_electric.png');
     this.load.image('engine_diesel', 'assets/engine_diesel.png');
     this.load.image('door_slide', 'assets/door_slide.png');
     this.load.image('door_front', 'assets/door_front.png');
@@ -77,6 +77,9 @@ export class BootScene extends Phaser.Scene {
     this.load.image('paint_green', 'assets/paint_green.png');
     this.load.image('paint_blue', 'assets/paint_blue.png');
     this.load.image('paint_yellow', 'assets/paint_yellow.png');
+    this.load.image('joker_shoddy', 'assets/joker_shoddy.png');
+    this.load.image('joker_cancel', 'assets/joker_cancel.png');
+    this.load.image('joker_apprentice', 'assets/joker_apprentice.png');
     this.load.image('menu', 'assets/menu_quad.png');
 
     // Audio
