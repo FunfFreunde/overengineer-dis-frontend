@@ -68,7 +68,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('window_rear', 'assets/window_rear.png');
     this.load.image('window_side', 'assets/window_side.png');
     this.load.image('engine_gas', 'assets/engine_gas.png');
-    this.load.image('engine_electro', 'assets/engine_electro.png');
+    this.load.image('engine_electric', 'assets/engine_electric.png');
     this.load.image('engine_diesel', 'assets/engine_diesel.png');
     this.load.image('door_slide', 'assets/door_slide.png');
     this.load.image('door_front', 'assets/door_front.png');
