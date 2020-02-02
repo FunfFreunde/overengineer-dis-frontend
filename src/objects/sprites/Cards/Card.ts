@@ -28,6 +28,7 @@ export class Card extends Physics.Arcade.Sprite {
         _parentScene.input.on('dragstart', this.onDragStart);
         _parentScene.input.on('dragend', this.onDragRelease);
         this.setSize(206, 313);
+        console.log(_spriteName);
     }
 
     onDrag(pointer: any, gameObject: Card, dragX: number, dragY: number) {
@@ -36,7 +37,7 @@ export class Card extends Physics.Arcade.Sprite {
     }
 
     onDragStart(pointer: any, gameObject: Card) {
-        gameObject.setTint(0x000000);
+        //gameObject.setTint(0x000000);
     }
 
     onDragRelease(pointer: any, gameObject: Card) {
