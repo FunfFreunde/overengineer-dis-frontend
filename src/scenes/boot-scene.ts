@@ -77,6 +77,9 @@ export class BootScene extends Phaser.Scene {
     this.load.image('paint_green', 'assets/paint_green.png');
     this.load.image('paint_blue', 'assets/paint_blue.png');
     this.load.image('paint_yellow', 'assets/paint_yellow.png');
+    this.load.image('joker_shoddy', 'assets/joker_shoddy.png');
+    this.load.image('joker_cancel', 'assets/joker_cancel.png');
+    this.load.image('joker_apprentice', 'assets/joker_apprentice.png');
     this.load.image('menu', 'assets/menu_quad.png');
 
     // Audio
