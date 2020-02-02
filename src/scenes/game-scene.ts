@@ -4,7 +4,7 @@ import { Card } from '../objects/sprites/Cards/Card';
 import { TireCard } from '../objects/sprites/Cards/TireCard';
 import { CardType, TireType } from '../objects/sprites/Cards/CardType';
 import { CardDealerInterface } from '../objects/CardDealerInterface';
-import { SimpleMockCardDealer } from '../objects/SimpleMockCardDealer';
+import { WebSocketCardDealer } from '../objects/WebSocketCardDealer';
 import { OpponentCard } from '../objects/sprites/Cards/OpponentCard';
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
@@ -40,6 +40,19 @@ export class GameScene extends Phaser.Scene {
   private onServerMessage(message) {
     console.log(message);
     var data = JSON.parse(message.data);
+
+    if(data.hasOwnProperty('id')){
+      console.log(data.id);
+    }
+
+    else if(data.hasOwnProperty('parts')){
+      console.log(data.parts);
+    }
+    else{
+      console.log('')
+      this._dealer = new WebSocketCardDealer()
+      this._hand = this._dealer.requestFullHand(this, data);
+    }
     console.log(data);
     //TODO Event handling!
   }
@@ -51,7 +64,6 @@ export class GameScene extends Phaser.Scene {
   public create() {
     this.size = getGameHeight(this)/4;
     this._createDropZone();
-    this._drawHandCards();
     this._setupCollision();
     this._displayOpponentCardBacks();
     this._setupOrderCard();

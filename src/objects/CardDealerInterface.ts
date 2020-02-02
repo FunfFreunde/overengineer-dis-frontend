@@ -6,6 +6,6 @@ export interface CardDealerInterface {
 
     requestNewCard(scene: Scene, hand: Physics.Arcade.Group);
     canRequestNewCard(hand: Physics.Arcade.Group): Boolean;
-    requestFullHand(scene: Scene): Physics.Arcade.Group;
+    requestFullHand(scene: Scene, data: Array<Object>): Physics.Arcade.Group;
 
 }

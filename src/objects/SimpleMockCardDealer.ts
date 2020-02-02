@@ -27,7 +27,7 @@ export class SimpleMockCardDealer implements CardDealerInterface{
     }
 
 
-    requestFullHand(scene: Scene): Physics.Arcade.Group {
+    requestFullHand(scene: Scene, data: Array<Object>): Physics.Arcade.Group {
         const hand = scene.physics.add.group({
             classType: Card,
             runChildUpdate: true,
