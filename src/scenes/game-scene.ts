@@ -31,6 +31,8 @@ export class GameScene extends Phaser.Scene {
   private _ws: WebSocket;
 
   private game_music;
+  private size;
+
   constructor() {
     super(sceneConfig);
   }
@@ -47,10 +49,12 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create() {
+    this.size = getGameHeight(this)/4;
     this._createDropZone();
     this._drawHandCards();
     this._setupCollision();
     this._displayOpponentCardBacks();
+    this._setupOrderCard();
     this.onResetGrid();
     this._clock = new Phaser.Time.Clock(this);
       this._ws = new WebSocket('ws://overengineer.wtf/backend/join');
@@ -131,8 +135,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   private _createDropZone() {
-    this._dropZone = this.physics.add.sprite(getGameWidth(this) / 2, getGameHeight(this) / 2, 'man');
-    this._eventText = this.add.text(getGameWidth(this)/ 2 - 300, getGameWidth(this) / 2 - 600, "Let's get started.")
+    this._dropZone = this.physics.add.sprite(getGameWidth(this) / 2, getGameHeight(this) / 2, 'car_red').setDisplaySize(this.size, this.size);
+    
   }
 
 
@@ -150,6 +154,9 @@ export class GameScene extends Phaser.Scene {
     this._dealer = new SimpleMockCardDealer();
     this._hand = this._dealer.requestFullHand(this);
   }
+
+  private _setupOrderCard(){
+    var order_card = this.add.sprite((getGameWidth(this)*0.05)+(120), getGameHeight(this)*0.95, 'order_card').setDisplaySize(800*1.5, 550*1.5);  }
 
   /**
    * opponentID: number
