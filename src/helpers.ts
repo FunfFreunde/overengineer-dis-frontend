@@ -10,7 +10,7 @@ export const getGameHeight = (scene: Phaser.Scene) => {
 
 export let musicState = (value?: undefined | string | boolean) => {
   if (value != undefined) {
-    if (localStorage.getItem('musicState') == 'false') {
+     if (localStorage.getItem('musicState') == 'false') {
 
       localStorage.setItem('musicState', 'true');
   
@@ -19,9 +19,7 @@ export let musicState = (value?: undefined | string | boolean) => {
       localStorage.setItem('musicState', 'false');
     }
   }
-  
-  
+    
   value = localStorage.getItem('musicState');
-  console.log(value);
   return value;
 };
