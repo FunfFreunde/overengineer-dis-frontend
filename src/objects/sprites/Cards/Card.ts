@@ -27,7 +27,7 @@ export class Card extends Physics.Arcade.Sprite {
 
         _parentScene.input.on('dragstart', this.onDragStart);
         _parentScene.input.on('dragend', this.onDragRelease);
-        this.setSize(128, 128);
+        this.setSize(206, 313);
     }
 
     onDrag(pointer: any, gameObject: Card, dragX: number, dragY: number) {
