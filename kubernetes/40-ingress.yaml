@@ -5,7 +5,7 @@ metadata:
   labels:
 spec:
   rules:
-    - host: "overengineer.fsn.k8s.ciapa.tech"
+    - host: "overengineer.wtf"
       http:
         paths:
           - path: /
