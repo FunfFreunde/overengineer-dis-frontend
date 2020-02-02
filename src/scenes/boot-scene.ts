@@ -61,18 +61,22 @@ export class BootScene extends Phaser.Scene {
     // Load sample assets
 
     this.load.image('man', 'assets/character.png');
-    this.load.image('tire_winter', 'assets/tire_all.png');
-    this.load.image('tire_summer', 'assets/tire_all.png');
+    this.load.image('tire_winter', 'assets/tire_winter.png');
+    this.load.image('tire_summer', 'assets/tire_summer.png');
     this.load.image('tire_all', 'assets/tire_all.png');
     this.load.image('window_front', 'assets/window_front.png');
-    this.load.image('window_rear', 'assets/window_front.png');
-    this.load.image('window_side', 'assets/window_front.png');
-    this.load.image('engine_gas', 'assets/engine.png');
-    this.load.image('engine_electro', 'assets/engine.png');
-    this.load.image('engine_diesel', 'assets/engine.png');
-    this.load.image('door_slide', 'assets/door.png');
-    this.load.image('door_front', 'assets/door.png');
-    this.load.image('door_back', 'assets/door.png');
+    this.load.image('window_rear', 'assets/window_rear.png');
+    this.load.image('window_side', 'assets/window_side.png');
+    this.load.image('engine_gas', 'assets/engine_gas.png');
+    this.load.image('engine_electro', 'assets/engine_electro.png');
+    this.load.image('engine_diesel', 'assets/engine_diesel.png');
+    this.load.image('door_slide', 'assets/door_slide.png');
+    this.load.image('door_front', 'assets/door_front.png');
+    this.load.image('door_back', 'assets/door_back.png');
+    this.load.image('paint_red', 'assets/paint_red.png');
+    this.load.image('paint_green', 'assets/paint_green.png');
+    this.load.image('paint_blue', 'assets/paint_blue.png');
+    this.load.image('paint_yellow', 'assets/paint_yellow.png');
     this.load.image('menu', 'assets/menu_quad.png');
 
     // Audio
