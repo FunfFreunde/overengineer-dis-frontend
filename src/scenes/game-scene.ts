@@ -1,5 +1,5 @@
 import { Input, Physics, GameObjects } from 'phaser';
-import { getGameWidth, getGameHeight } from '../helpers';
+import { getGameWidth, getGameHeight, musicState } from '../helpers';
 import { Card } from '../objects/sprites/Cards/Card';
 import { TireCard } from '../objects/sprites/Cards/TireCard';
 import { CardType, TireType } from '../objects/sprites/Cards/CardType';
@@ -30,6 +30,7 @@ export class GameScene extends Phaser.Scene {
   private _opponentHands: Array<Physics.Arcade.Group>;
   private _ws: WebSocket;
 
+  private game_music;
   constructor() {
     super(sceneConfig);
   }
@@ -57,6 +58,14 @@ export class GameScene extends Phaser.Scene {
       this.onConnectToGame(event);
       this._lastBeat = this._clock.now;
     };
+
+    this.game_music = this.sound.add('game_music');
+    this.game_music.play({
+      volume: .1,
+      loop: true,
+    })
+    this.game_music.pause();
+    musicState() != 'false' ? this.game_music.resume() : this.game_music.pause();
 
     this._ws.onerror = (event) => {
       alert("socket error\n\n" + event);
