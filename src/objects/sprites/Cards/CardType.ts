@@ -34,7 +34,7 @@ export enum EngineType {
 export enum DoorType {
     SLIDER = 'door_slide',
     FRONT = 'door_front',
-    REAR = 'door_rear'
+    REAR = 'door_back'
 }
 
 export  enum PaintJobType {

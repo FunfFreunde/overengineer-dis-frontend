@@ -229,7 +229,7 @@ export class GameScene extends Phaser.Scene {
       cellWidth: 64,
       cellHeight: 64,
       x: getGameWidth(this) / 2 + 128,
-      y: getGameHeight(this) - 128
+      y: getGameHeight(this) - 280
     });
   }
 }
